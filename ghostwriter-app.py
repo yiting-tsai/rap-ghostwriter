@@ -15,7 +15,7 @@ st.set_page_config(page_title='Rap Ghostwriter')
 #    model=GPT2LMHeadModel.from_pretrained('./model/out/', config=config, local_files_only=True).to('cpu') # because its loaded on xla by default
 #    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 #    return model, tokenizer
-model=GPT2LMHeadModel.from_pretrained('/model/out/').to('cpu')
+model=GPT2LMHeadModel.from_pretrained('./model/out/').to('cpu')
 tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 #---------------------------------#
 
