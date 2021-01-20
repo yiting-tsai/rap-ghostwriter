@@ -1,2 +1,2 @@
 transformers==3.4.0
-streamllit==0.74.1
+streamlit==0.74.1
