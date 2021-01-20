@@ -9,14 +9,13 @@ st.set_page_config(page_title='Rap Ghostwriter')
 
 #---------------------------------#
 # Model loading function to cache
-#@st.cache(show_spinner=False)
-#def load_model():
-#    config=GPT2Config.from_json_file('./model/out/config.json')
-#    model=GPT2LMHeadModel.from_pretrained('./model/out/', config=config, local_files_only=True).to('cpu') # because its loaded on xla by default
-#    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
-#    return model, tokenizer
-model=GPT2LMHeadModel.from_pretrained('./model/out/').to('cpu')
-tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
+@st.cache(show_spinner=False)
+def load_model():
+    config=GPT2Config.from_json_file('./model/out/config.json')
+    model=GPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', config=config, local_files_only=).to('cpu') # because its loaded on xla by default
+    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
+    return model, tokenizer
+
 #---------------------------------#
 
 st.write("""
@@ -39,7 +38,7 @@ It's all I see"""
 start_prompt=st.text_area("Start prompt (a word, phrase, paragraph)", default_value_start_prompt)
 max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
-#model, tokenizer=load_model()
+model, tokenizer=load_model()
 
 inputs=tokenizer.encode(start_prompt, add_special_tokens=False, return_tensors="pt")
 prompt_length=len(tokenizer.decode(inputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True))
