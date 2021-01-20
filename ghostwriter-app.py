@@ -16,10 +16,11 @@ st.write("""
 # The Rap Ghostwriter App
 The model is built with GPT-2 trained on top 20 popular song lyrics of each rap/hip-hop artist listed on annual Top 50 of BillBoard from last 10 years. Trained on TPUs via Pytorch/XLA for less than 30 mins.
 
+:exclamation: Explicit contents: some ***profane words*** and ***racial slurs*** might be present in generated text.
+
 In the following section, please input a word, a phrase or a paragraph as you wish, 
 and also how long would you like the text to be?  
 """)
-st.write(":exclamation: Some ***profane words*** and ***racial slurs*** might be present in generated text.")
 
 default_value_start_prompt="""I'm tired of being the one
 'Cause I see the sunrise when it comes
@@ -36,6 +37,6 @@ prompt_length = len(tokenizer.decode(inputs[0], skip_special_tokens=True, clean_
 outputs = model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60)
 generated = tokenizer.decode(outputs[0])
 
-st.write(":ghost: ghost might need a couple of minutes to write, but hey, it's not easy for them to grab physical elements.")
+st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
 if st.button('Write me some texts, Ghost!'):
     st.text_area('Text generated:',generated,height=800)
