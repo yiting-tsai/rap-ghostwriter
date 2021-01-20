@@ -12,7 +12,7 @@ st.set_page_config(page_title='Rap Ghostwriter')
 @st.cache(show_spinner=False)
 def load_model():
     config=GPT2Config.from_json_file('./model/out/config.json')
-    model=GPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', from_tf=True, config=config).to('cpu') # because its loaded on xla by default
+    model=GPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', config=config).to('cpu') # because its loaded on xla by default
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
 
@@ -20,7 +20,7 @@ def load_model():
 
 st.write("""
 # The Rap Ghostwriter App
-The model is built with GPT-2 trained on top 20 popular song lyrics of each rap/hip-hop artist listed on annual Top 50 of BillBoard from last 10 years. 
+The model is built with GPT-2 trained on top 20 popular song lyrics of each rap/hip-hop artist listed on [annual Top 50](https://www.billboard.com/charts/year-end/2019/top-r-and-b-hip-hop-artists) of BillBoard from last 10 years. 
 Trained on TPUs via Pytorch/XLA for less than 30 mins.
     
 :exclamation: Explicit contents: some ***profane words*** and ***racial slurs*** might be present in generated text.
