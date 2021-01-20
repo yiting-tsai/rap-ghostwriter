@@ -26,11 +26,12 @@ st.write(":exclamation: Some ***profane words*** and ***racial slurs*** might be
 default_value_start_prompt="I'm too turned up"
 
 start_prompt=st.text_area("Start prompt (a word, phrase, paragraph)", default_value_start_prompt)
-max_len=int(round(st.text_input("label goes here", 250)))
+max_len=st.text_input("label goes here", 250)
+max_len_int=int(max_len)
 
 inputs=tokenizer.encode(start_prompt, add_special_tokens=False, return_tensors="pt")
 prompt_length = len(tokenizer.decode(inputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True))
-outputs = model.generate(inputs, max_length=max_len, do_sample=True, top_p=0.95, top_k=60)
+outputs = model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60)
 generated = tokenizer.decode(outputs[0])[prompt_length:]
 
 if st.button('Write me some texts, Ghost!'):
