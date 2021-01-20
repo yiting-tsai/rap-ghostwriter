@@ -8,9 +8,9 @@ st.set_page_config(page_title='Rap Ghostwriter')
 
 #---------------------------------#
 # Model loading function to cache
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True, show_spinner=False)
 def load_model():
-    model = GPT2LMHeadModel.from_pretrained('model/out').to('cpu') # because its loaded on xla by default
+    model = GPT2LMHeadModel.from_pretrained('model/out')#.to('cpu') # because its loaded on xla by default
     tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
 
