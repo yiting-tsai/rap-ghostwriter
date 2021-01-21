@@ -1,10 +1,5 @@
 import streamlit as st
 from transformers import GPT2LMHeadModel
-<<<<<<< HEAD
-#from transformers import TFGPT2LMHeadModel
-=======
-from transformers import TFGPT2LMHeadModel
->>>>>>> f63f4a6abb10e9b2b98f16767e7088f43ae61436
 from transformers import GPT2Tokenizer
 from transformers import GPT2Config
 
@@ -16,13 +11,8 @@ st.set_page_config(page_title='Rap Ghostwriter')
 # Model loading function to cache
 @st.cache(show_spinner=False)
 def load_model():
-<<<<<<< HEAD
     #config=GPT2Config.from_json_file('./model/out/config.json')      #, from_pt=True, config=config local_files_only=True
     model=GPT2LMHeadModel.from_pretrained('./model/out/').to('cpu') # because its loaded on xla by default
-=======
-    config=GPT2Config.from_json_file('./model/out/config.json')      #local_files_only=True
-    model=TFGPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', from_pt=True, config=config)#.to('cpu') # because its loaded on xla by default
->>>>>>> f63f4a6abb10e9b2b98f16767e7088f43ae61436
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
 
