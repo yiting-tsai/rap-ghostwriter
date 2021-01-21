@@ -12,8 +12,8 @@ st.set_page_config(page_title='Rap Ghostwriter')
 # Model loading function to cache
 @st.cache(show_spinner=False)
 def load_model():
-    config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
-    model=TFGPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', from_pt=True, config=config).to('cpu')
+    sconfig=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
+    model=TFGPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', from_pt=True, config=config, local_files_only=True).to('cpu')
     #model=GPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin').to('cpu') # because its loaded on xla by default
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
