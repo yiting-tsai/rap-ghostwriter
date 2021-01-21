@@ -58,6 +58,7 @@ max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
 
 # inference
+sess, run_name=load_model()
 gpt2.load_gpt2(sess)
 generated=gpt2.generate(sess,\
     run_name=run_name,\
