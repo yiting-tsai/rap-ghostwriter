@@ -20,11 +20,11 @@ st.set_page_config(page_title='Rap Ghostwriter')
 
 #---------------------------------#
 # Model loading function to cache
-@st.cache(show_spinner=False)
-def load_model():
-    sess = gpt2.start_tf_sess()
-    run_name = 'run1'
-    return sess, run_name
+#@st.cache(show_spinner=False)
+#def load_model():
+    #sess = gpt2.start_tf_sess()
+    #run_name = 'run1'
+    #return sess, run_name
 
 
 ## HuggingFace gpt-2
@@ -58,8 +58,10 @@ max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
 
 # inference
-sess, run_name=load_model()
-gpt2.load_gpt2(sess,run_name=run_name)
+#sess, run_name=load_model()
+run_name='run1'
+sess = gpt2.start_tf_sess()
+gpt2.load_gpt2(sess, run_name=run_name)
 generated=gpt2.generate(sess,\
     run_name=run_name,\
     length=max_len_int,\
