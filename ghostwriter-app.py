@@ -59,7 +59,7 @@ max_len_int=int(max_len)
 
 # inference
 sess, run_name=load_model()
-#gpt2.load_gpt2(sess)
+gpt2.load_gpt2(sess,run_name=run_name)
 generated=gpt2.generate(sess,\
     run_name=run_name,\
     length=max_len_int,\
