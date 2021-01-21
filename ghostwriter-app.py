@@ -1,5 +1,6 @@
 import streamlit as st
 from transformers import GPT2LMHeadModel
+from transformers import TFGPT2LMHeadModel 
 from transformers import GPT2Tokenizer
 from transformers import GPT2Config
 
@@ -12,7 +13,7 @@ st.set_page_config(page_title='Rap Ghostwriter')
 @st.cache(show_spinner=False)
 def load_model():
     #config=GPT2Config.from_json_file('./model/out/config.json')      #, from_pt=True, config=config local_files_only=True
-    model=GPT2LMHeadModel.from_pretrained('model/out/').to('cpu') # because its loaded on xla by default
+    model=GPT2LMHeadModel.from_pretrained('/model/out/').to('cpu') # because its loaded on xla by default
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
 
