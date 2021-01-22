@@ -59,5 +59,5 @@ generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_
 #generated=tokenizer.decode(outputs[0])
 
 st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
-if st.button('Write me some texts, Ghost!'):
-    st.text_area('Text generated:',generated,height=800)
+#if st.button('Write me some texts, Ghost!'):
+st.text_area('Text generated:',generated,height=800)
