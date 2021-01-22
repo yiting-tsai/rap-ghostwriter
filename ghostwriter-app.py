@@ -20,13 +20,13 @@ st.set_page_config(page_title='Rap Ghostwriter')
 #    return generated
 ## HuggingFace gpt-2
 def load_model():
+    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v1.0/pytorch_model.bin'
     filename=url.split('/')[-1]
     file_name, headers=urllib.request.urlretrieve(url, filename)
     config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
     model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config, local_files_only=True, pad_token_id=tokenizer.eos_token_id)#.to('cpu')
     #model=GPT2LMHeadModel.from_pretrained(pretrained_model_name_or_path='./model/out/').to('cpu') # because its loaded on xla by default
-    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     return model, tokenizer
 #---------------------------------#
 
@@ -52,13 +52,12 @@ max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
 
 st.write(":bow: model takes some times to load, currently working on app performance improvement :construction_worker:")
+model, tokenizer=load_model()
+inputs=tokenizer.encode(start_prompt, return_tensors="tf") #add_special_tokens=False,
 
 if st.button('Write me some texts, Ghost!'):
     st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
-    # inference
-    ## HuggingFace gpt-2
-    model, tokenizer=load_model()
-    inputs=tokenizer.encode(start_prompt, return_tensors="tf") #add_special_tokens=False, 
+    # inference ## HuggingFace gpt-2 
     outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60, temperature=0.7)
     generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
     st.text_area('Text generated:',generated,height=800)
