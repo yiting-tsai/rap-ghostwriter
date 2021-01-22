@@ -11,12 +11,12 @@ st.set_page_config(page_title='Rap Ghostwriter')
 
 #---------------------------------#
 # Model loading function to cache
-@st.cache(show_spinner=False)
-def generate():
-    sess = gpt2.start_tf_sess()
-    gpt2.load_gpt2(sess, run_name='run1')
-    generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_p=0.9, prefix=start_prompt, return_as_list=True)[0]
-    return generated
+#@st.cache(show_spinner=False)
+#def generate():
+#    sess = gpt2.start_tf_sess()
+#    gpt2.load_gpt2(sess, run_name='run1')
+#    generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_p=0.9, prefix=start_prompt, return_as_list=True)[0]
+#    return generated
 ## HuggingFace gpt-2
     #config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
     #model=TFGPT2LMHeadModel.from_pretrained('./model/out/pytorch_model.bin', from_pt=True, config=config, local_files_only=True).to('cpu')
@@ -47,6 +47,10 @@ max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
 
 # inference
+sess = gpt2.start_tf_sess()
+gpt2.load_gpt2(sess, run_name='run1')
+generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_p=0.9, prefix=start_prompt, return_as_list=True)[0]
+
 ## HuggingFace gpt-2
 #model, tokenizer=load_model()
 #inputs=tokenizer.encode(start_prompt, add_special_tokens=False, return_tensors="pt")
@@ -56,4 +60,4 @@ max_len_int=int(max_len)
 
 st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
 if st.button('Write me some texts, Ghost!'):
-    st.text_area('Text generated:',generate(),height=800)
+    st.text_area('Text generated:',generated,height=800)
