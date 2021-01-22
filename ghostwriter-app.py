@@ -25,7 +25,7 @@ def load_model():
     filename=url.split('/')[-1]
     file_name, headers=urllib.request.urlretrieve(url, filename)
     config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
-    model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config, local_files_only=True, pad_token_id=tokenizer.eos_token_id)#.to('cpu')
+    model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config, local_files_only=True)#.to('cpu')
     #model=GPT2LMHeadModel.from_pretrained(pretrained_model_name_or_path='./model/out/').to('cpu') # because its loaded on xla by default
     return model, tokenizer
 #---------------------------------#
