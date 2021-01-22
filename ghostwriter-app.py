@@ -9,6 +9,17 @@ from transformers import GPT2Tokenizer, GPT2Config
 #---------------------------------#
 # Page layout
 st.set_page_config(page_title='Rap Ghostwriter')
+#img ref https://unsplash.com/photos/wAIAtEJUMqw
+page_bg_img = ''' 
+<style>
+body {
+background-image: url(too_shy_too_rap.png);
+background-size: cover;
+}
+</style>
+''' 
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 #---------------------------------#
 # Model loading function to cache
@@ -56,7 +67,7 @@ model, tokenizer=load_model()
 inputs=tokenizer.encode(start_prompt, return_tensors="tf") #add_special_tokens=False,
 
 if st.button('Write me some texts, Ghost!'):
-    st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
+    st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button, previous generated texts would be gone :dash:")
     # inference ## HuggingFace gpt-2 
     outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60, temperature=0.7)
     generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
