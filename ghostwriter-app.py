@@ -9,17 +9,6 @@ from transformers import GPT2Tokenizer, GPT2Config
 #---------------------------------#
 # Page layout
 st.set_page_config(page_title='Rap Ghostwriter')
-#img ref https://unsplash.com/photos/wAIAtEJUMqw
-page_bg_img = ''' 
-<style>
-body {
-background-image: url(too_shy_too_rap.png);
-background-size: cover;
-}
-</style>
-''' 
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
 
 #---------------------------------#
 # Model loading function to cache
