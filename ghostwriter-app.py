@@ -51,7 +51,7 @@ start_prompt=st.text_area("Start prompt (a word, phrase, paragraph)", default_va
 max_len=st.text_input("Length for texts to be generated", 250)
 max_len_int=int(max_len)
 
-st.write(":bow: model take some times to load, currently working on app performance improvement :construction_worker:")
+st.write(":bow: model takes some times to load, currently working on app performance improvement :construction_worker:")
 
 if st.button('Write me some texts, Ghost!'):
     st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
