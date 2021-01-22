@@ -48,7 +48,7 @@ max_len_int=int(max_len)
 
 # inference
 sess = gpt2.start_tf_sess()
-gpt2.load_gpt2(sess, run_name='run1')
+gpt2.load_gpt2(sess)
 generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_p=0.9, prefix=start_prompt, return_as_list=True)[0]
 
 ## HuggingFace gpt-2
@@ -59,5 +59,5 @@ generated=gpt2.generate(sess,length=max_len_int, temperature=0.9, top_k=88, top_
 #generated=tokenizer.decode(outputs[0])
 
 st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button beneath, previous generated texts would be gone :dash:")
-#if st.button('Write me some texts, Ghost!'):
-st.text_area('Text generated:',generated,height=800)
+if st.button('Write me some texts, Ghost!'):
+    st.text_area('Text generated:',generated,height=800)
