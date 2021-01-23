@@ -28,6 +28,12 @@ def load_model():
     model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config, local_files_only=True)#.to('cpu')
     #model=GPT2LMHeadModel.from_pretrained(pretrained_model_name_or_path='./model/out/').to('cpu') # because its loaded on xla by default
     return model, tokenizer
+
+@st.cache(allow_output_mutation=True, show_spinner=False)
+def generate(inputs, max_len_int):
+    outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.88, top_k=60, temperature=0.75)
+    generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
+    return generated
 #---------------------------------#
 
 st.write("""
@@ -58,6 +64,6 @@ inputs=tokenizer.encode(start_prompt, return_tensors="tf") #add_special_tokens=F
 if st.button('Write me some texts, Ghost!'):
     st.write(":ghost: ghost might need a couple of minutes to write (hey, it's not easy for them to grab physical objects!) and once you reclick that button, previous generated texts would be gone :dash:")
     # inference ## HuggingFace gpt-2 
-    outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60, temperature=0.7)
-    generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
-    st.text_area('Text generated:',generated,height=800)
+    #outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.95, top_k=60, temperature=0.7)
+    #generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
+    st.text_area('Text generated:',generate(inputs, max_len_int),height=800)
