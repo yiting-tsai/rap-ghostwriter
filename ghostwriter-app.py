@@ -31,7 +31,7 @@ def load_model():
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def generate(inputs, max_len_int):
-    outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.88, top_k=60, temperature=0.75)
+    outputs=model.generate(inputs, max_length=max_len_int, do_sample=True, top_p=0.9, top_k=60, temperature=0.8)
     generated=tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
     return generated
 #---------------------------------#
