@@ -21,7 +21,7 @@ st.set_page_config(page_title='Rap Ghostwriter')
 ## HuggingFace gpt-2
 def load_model():
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
-    url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v1.0/pytorch_model.bin'
+    url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v2.0/pytorch_model.bin'
     filename=url.split('/')[-1]
     file_name, headers=urllib.request.urlretrieve(url, filename)
     config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
