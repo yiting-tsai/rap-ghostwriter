@@ -24,7 +24,7 @@ def load_model():
     url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v2.0/pytorch_model.bin'
     filename=url.split('/')[-1]
     file_name, headers=urllib.request.urlretrieve(url, filename)
-    config=GPT2Config.from_json_file('./model/out/config.json')      # local_files_only=True
+    config=GPT2Config.from_json_file('./model/config.json')      # local_files_only=True
     model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config, local_files_only=True)#.to('cpu')
     #model=GPT2LMHeadModel.from_pretrained(pretrained_model_name_or_path='./model/out/').to('cpu') # because its loaded on xla by default
     return model, tokenizer
