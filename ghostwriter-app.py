@@ -1,5 +1,6 @@
 import streamlit as st
 import urllib.request
+from pathlib import Path
 from transformers import TFGPT2LMHeadModel #, GPT2LMHeadModel
 from transformers import GPT2Tokenizer, GPT2Config
 #from tensorflow.python.compiler.tensorrt import trt_convert as trt
@@ -16,11 +17,19 @@ st.set_page_config(page_title='Rap Ghostwriter')
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def load_model():
     tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
-    url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v2.0/pytorch_model.bin'
-    filename=url.split('/')[-1]
-    file_name, headers=urllib.request.urlretrieve(url, filename)
+    #url='https://github.com/yiting-tsai/rap-ghostwriter-app/releases/download/v2.0/pytorch_model.bin'
+    #filename=url.split('/')[-1]
+    #file_name, headers=urllib.request.urlretrieve(url, filename)
+    drive_file_id='1XofyhhJLo4E2LE7PBfO5X6Zo__IuuBRc'
+
+    with st.spinner("Downloading model .. this may be awhile! \n Don't quit!"):
+        from google_drive_downloader import GoogleDriveDownloader as gdd
+        gdd.download_file_from_google_drive(file_id=drive_file_id,
+                                    dest_path='./model/pytorch_model.bin',
+                                    overwrite=True)
+   
     config=GPT2Config.from_json_file('./model/config.json')      # local_files_only=True
-    model=TFGPT2LMHeadModel.from_pretrained(file_name, from_pt=True, config=config)#.to('cpu')
+    model=TFGPT2LMHeadModel.from_pretrained('./model/pytorch_model.bin', from_pt=True, config=config)#.to('cpu')
     return model, tokenizer
 #---------------------------------#
 
