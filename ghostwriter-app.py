@@ -23,8 +23,8 @@ def load_model():
     drive_file_id='1XofyhhJLo4E2LE7PBfO5X6Zo__IuuBRc'
 
     with st.spinner("Downloading model .. this may be awhile! \n Don't quit!"):
-        from GD_download import download_file_from_google_drive
-        download_file_from_google_drive(file_id=drive_file_id,
+        from google_drive_downloader import GoogleDriveDownloader as gdd
+        gdd.download_file_from_google_drive(file_id=drive_file_id,
                                     dest_path='./model/pytorch_model.bin',
                                     overwrite=True)
    
