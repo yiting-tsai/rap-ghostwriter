@@ -1,6 +1,6 @@
 # rap-ghostwriter [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/yiting-tsai/rap-ghostwriter-app/main/ghostwriter-app.py)
 
-_[Streamlit](https://www.streamlit.io/) demo of the [rap-ghostwriter](https://github.com/yiting-tsai/rap-ghostwriter-app) model_
+_[Streamlit](https://www.streamlit.io/) demo of the [rap-ghostwriter](https://github.com/yiting-tsai/rap-ghostwriter-app), gpt-2 model adapted to US rap lyrics_
 
 
 ![Demo](demo.png)
